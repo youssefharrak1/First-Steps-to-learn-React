@@ -1,28 +1,25 @@
 import UsersTable from "./UsersTable";
 import {useState} from "react";
+import UsersAdd from "./UsersAdd";
 
 export default function  UsersApp()
 {
-    const InitialData=[
-        {
-            id:1,
-            fullname:"Youssef harrak",
-            country:"Morocco",
-        },
-        {
-            id:2,
-            fullname:"Khalid harrak",
-            country:"Morocco",
-        },
-        {
-            id:3,
-            fullname:"Radia harrak",
-            country:"Morocco",
-        }
-    ]
-    const [users, setUsers]=useState(InitialData)
+
+    const [users, setUsers]=useState([])
+    const[lastid,setLastId]=useState(1)
+    const addUser=(data)=>{
+     setUsers(prevState => [...prevState,data.payload])
+     setLastId(prevState => prevState+1)
+
+    }
     return(
-       <UsersTable users={users} />
+        <>
+            <UsersAdd lastid={lastid} onAddUser={addUser} />
+            <hr/>
+            <UsersTable users={users}  />
+
+        </>
+
     )
 
 }
