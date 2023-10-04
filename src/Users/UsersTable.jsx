@@ -1,4 +1,4 @@
-export default function UsersTable()
+export default function UsersTable({users})
 {
     return (
         <>
@@ -12,6 +12,13 @@ export default function UsersTable()
                 </tr>
                 </thead>
                 <tbody>
+                {
+                    (users.length>0)?users.map((users,key)=> <tr key={key}>
+                    <td>{users.id}</td>
+                    <td>{users.fullname}</td>
+                    <td>{users.country}</td>
+                </tr>): <tr><td colSpan={3} align={"center"}>No users to display</td></tr>
+                }
 
                 </tbody>
             </table>
