@@ -3,13 +3,15 @@ import {createContext, useContext, useState} from "react";
 import UsersAdd from "./UsersAdd";
 import UsersLayout from "./UsersLayout";
 
+
+export const UsersContext = createContext({
+    users: [],
+    lastid: 1,
+    adduser:()=>null
+});
 export default function  UsersApp()
 {
 
-    const UsersContext=createContext({
-        users:[],
-        lastid:1,
-    })
     const [users, setUsers]=useState([])
     const[lastid,setLastId]=useState(1)
     const addUser=(data)=>{
@@ -22,6 +24,7 @@ export default function  UsersApp()
             <UsersContext.Provider value={{
                 users: users,
                 lastid: lastid,
+                adduser:addUser,
             }}>
                 <UsersLayout  />
             </UsersContext.Provider>

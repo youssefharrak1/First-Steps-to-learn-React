@@ -1,5 +1,9 @@
-export default function UsersTable({users})
+import {useContext} from "react";
+import {UsersContext} from "./UsersApp";
+
+export default function UsersTable()
 {
+    const Context=useContext(UsersContext)
     return (
         <>
             <table className="table table-striped table-responsive">
@@ -13,7 +17,7 @@ export default function UsersTable({users})
                 </thead>
                 <tbody>
                 {
-                    (users.length>0)?users.map((users,key)=> <tr key={key}>
+                    Context.users.length>0?Context.users.map((users,key)=> <tr key={key}>
                     <td>{users.id}</td>
                     <td>{users.fullname}</td>
                     <td>{users.country}</td>
