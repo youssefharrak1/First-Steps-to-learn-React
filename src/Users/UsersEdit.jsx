@@ -9,22 +9,6 @@ export default function UsersEdit()
     const Context=useContext(UsersContext)
     const params=useParams()
     const [Currentuser,setCurrentUser]=useState({})
-    /*   const handleSubmit=(e)=>
-   {
-       e.preventDefault()
-
-     /*Context.adduser({
-         payload:{
-             id:params.id,
-             fullname:fullname.current.value,
-             country:country.current.value,
-         }
-         fullname.current.value=null
-         country.current.value=null
-     })
-
-
-     }*/
 
     useEffect( ()=>{
         const {id}=params
@@ -38,6 +22,20 @@ export default function UsersEdit()
             console.error("User not found")
         }
     } )
+      const handleSubmit=(e)=> {
+       e.preventDefault()
+       Context.updateuser({
+         payload:{
+             id:parseInt(params.id),
+             fullname:fullname.current.value,
+             country:country.current.value,
+         }
+     })
+       fullname.current.value=null
+       country.current.value=null
+     }
+
+
 
 
 
@@ -48,7 +46,7 @@ export default function UsersEdit()
     return (
         <>
             <h1> Add User</h1>
-            <form  >
+            <form onSubmit={handleSubmit}  >
                 <div className="mb-3 row">
                     <label htmlFor="Current Id" className="col-sm-2 col-form-label">Current Id</label>
                     <div className="col-sm-10">
@@ -68,7 +66,7 @@ export default function UsersEdit()
                 <div className="mb-3 row">
                     <label htmlFor="Country" className="col-sm-2 col-form-label">Country</label>
                     <div className="col-sm-10">
-                        <select className="form-select" name="country"  id="Country" ref={country} defaultValue={Currentuser?.country}>
+                        <select className="form-select" name="country"  id="Country" ref={country} defaultValue={Currentuser?.country} key={Currentuser?.country}>
                             <option value="">Select Your Country</option>
                             <option value="Morocco">Morocco</option>
                             <option value="Algeria">Algeria</option>
