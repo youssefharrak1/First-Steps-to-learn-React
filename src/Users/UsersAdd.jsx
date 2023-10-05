@@ -9,10 +9,13 @@ export default function UsersAdd({lastid,onAddUser})
     e.preventDefault();
   onAddUser({
       payload:{
+          id:lastid,
           fullname:fullname.current.value,
           country:country.current.value,
       }
   })
+    fullname.current.value=null
+    country.current.value=null
 
 
 }

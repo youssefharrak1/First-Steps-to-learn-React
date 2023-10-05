@@ -1,10 +1,15 @@
 import UsersTable from "./UsersTable";
-import {useState} from "react";
+import {createContext, useContext, useState} from "react";
 import UsersAdd from "./UsersAdd";
+import UsersLayout from "./UsersLayout";
 
 export default function  UsersApp()
 {
 
+    const UsersContext=createContext({
+        users:[],
+        lastid:1,
+    })
     const [users, setUsers]=useState([])
     const[lastid,setLastId]=useState(1)
     const addUser=(data)=>{
@@ -14,9 +19,14 @@ export default function  UsersApp()
     }
     return(
         <>
-            <UsersAdd lastid={lastid} onAddUser={addUser} />
-            <hr/>
-            <UsersTable users={users}  />
+            <UsersContext.Provider value={{
+                users: users,
+                lastid: lastid,
+            }}>
+                <UsersLayout  />
+            </UsersContext.Provider>
+
+
 
         </>
 
