@@ -20,22 +20,24 @@ export default function  UsersApp()
     {
      setUsers(prevState => [...prevState,data.payload])
      setLastId(prevState => prevState+1)
+        window.history.back()
     }
     const UpdateUser=(data)=>
     {
         const {id,...rest}=data.payload
         setUsers(prevState => prevState.map(user=> {
-            if(user.id==id)
+            if(user.id===id)
             {
                 return {id:user.id,...rest}
             }
             return user
         }))
+        window.history.back()
     }
     const DeleteUser=(data)=>{
         const {id}=data.payload
         setUsers(prevState => prevState.filter(user => user.id !== id ))
-
+       window.history.back()
     }
     return(
         <>

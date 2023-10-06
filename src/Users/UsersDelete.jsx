@@ -22,6 +22,7 @@ export default function UsersDelete()
         <>
 
             <div className="d-grid gap-2">
+                <span className="alert alert-danger">pay attention you can't go back please take the right choice</span>
                 <button className="btn btn-danger" type="submit" onClick={onhandlesubmit}>Delete</button>
             </div>
         </>
