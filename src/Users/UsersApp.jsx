@@ -8,7 +8,8 @@ export const UsersContext = createContext({
     users: [],
     lastid: 1,
     adduser:()=>null,
-    updateuser:()=>null
+    updateuser:()=>null,
+    deleteuser:()=>null,
 });
 export default function  UsersApp()
 {
@@ -22,7 +23,19 @@ export default function  UsersApp()
     }
     const UpdateUser=(data)=>
     {
-      console.log(data)
+        const {id,...rest}=data.payload
+        setUsers(prevState => prevState.map(user=> {
+            if(user.id==id)
+            {
+                return {id:user.id,...rest}
+            }
+            return user
+        }))
+    }
+    const DeleteUser=(data)=>{
+        const {id}=data.payload
+        setUsers(prevState => prevState.filter(user => user.id !== id ))
+
     }
     return(
         <>
@@ -31,6 +44,7 @@ export default function  UsersApp()
                 lastid: lastid,
                 adduser:addUser,
                 updateuser:UpdateUser,
+                deleteuser:DeleteUser,
             }}>
                 <UsersLayout  />
             </UsersContext.Provider>

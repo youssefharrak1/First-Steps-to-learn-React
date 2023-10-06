@@ -31,8 +31,7 @@ export default function UsersEdit()
              country:country.current.value,
          }
      })
-       fullname.current.value=null
-       country.current.value=null
+
      }
 
 
